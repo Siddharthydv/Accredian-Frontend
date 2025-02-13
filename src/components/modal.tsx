@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
  const API_URL = import.meta.env.VITE_BACKEND_URL;
 
 export default function Modal({ setIsOpen }: { setIsOpen: (val: boolean) => void }) {
-  const navigate=useNavigate();
   const registerReferral = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -14,7 +13,7 @@ export default function Modal({ setIsOpen }: { setIsOpen: (val: boolean) => void
     console.log("Form submitted:", data);
     // Call API to register referral
     try{
-      const res=await axios.post(`${API_URL}/referral/createReferral`,{refereeName:data.friendName, refereeEmail:data.friendEmail, courseInterested:data.course},{withCredentials:true})
+      await axios.post(`${API_URL}/referral/createReferral`,{refereeName:data.friendName, refereeEmail:data.friendEmail, courseInterested:data.course},{withCredentials:true})
       setIsOpen(false);
     }catch(error)
     {
